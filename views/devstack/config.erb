@@ -1,0 +1,27 @@
+<%
+   f = taglib("/lib/form")
+   f.block do
+%>
+    <table style="margin-left: 30px;">
+      <%
+         f.entry :title => 'OS_USERNAME',
+                 :field => 'os_username',
+                 :description => 'openstack username' do
+           f.textbox :clazz => 'required', :default => '${OS_USERNAME}'
+         end
+         f.entry :title => 'OS_PASSWORD',
+                 :field => 'os_password',
+                 :description => 'openstack password' do
+           f.textbox :clazz => 'required', :default => '${OS_PASSWORD}'
+         end
+         f.entry :title => 'OS_TENANT_NAME',
+                 :field => 'os_tenant_name',
+                 :description => 'openstack tenant name' do
+           f.textbox :clazz => 'required', :default => '${OS_TENANT_NAME}'
+         end
+
+
+      %></table>
+<%
+   end
+%>
