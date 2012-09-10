@@ -19,6 +19,11 @@
                  :description => 'openstack tenant name' do
            f.textbox :clazz => 'required', :default => '${OS_TENANT_NAME}'
          end
+         f.entry :title => 'OS_AUTH_URL',
+                 :field => 'os_auth_url',
+                 :description => 'openstack auth url' do
+           f.textbox :clazz => 'required', :default => '${OS_AUTH_URL}'
+         end
 
 
       %></table>
