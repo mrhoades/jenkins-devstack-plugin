@@ -5,6 +5,7 @@ GEM
       json
       slop (~> 3.0.2)
     json (1.7.5-java)
+    novawhiz (0.0.0)
     slop (3.0.4)
 
 PLATFORMS
@@ -12,3 +13,4 @@ PLATFORMS
 
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
+  novawhiz

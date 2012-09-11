@@ -1,4 +1,7 @@
-require 'openstack'
+require 'novawhiz'
+require 'net/http'
+require 'uri'
+require 'buffered_io_patch'
 
 class Devstack < Jenkins::Tasks::Builder
 
@@ -10,17 +13,43 @@ class Devstack < Jenkins::Tasks::Builder
     attrs.each { |k, v| instance_variable_set "@#{k}", v }
   end
 
-  def perform(build, launcher, listener)
-    listener.info 'hello, ' + os_username
+  def install_devstack_cmd
+    <<-eos
+      sudo apt-get install --yes git &&
+      git clone git://github.com/openstack-dev/devstack.git &&
+      cd devstack &&
+      echo ADMIN_PASSWORD=pass      >  localrc &&
+      echo MYSQL_PASSWORD=pass      >> localrc &&
+      echo RABBIT_PASSWORD=pass     >> localrc &&
+      echo SERVICE_PASSWORD=pass    >> localrc &&
+      echo SERVICE_TOKEN=tokentoken >> localrc &&
+      echo FLAT_INTERFACE=br100     >> localrc &&
+      ./stack.sh
+    eos
+  end
 
-    os = OpenStack::Connection.create(
+  def perform(build, launcher, listener)
+    nw = NovaWhiz.new(
       :username => os_username,
-      :api_key => os_password,
+      :password => os_password,
       :authtenant => os_tenant_name,
       :auth_url => os_auth_url,
       :service_type => "compute")
 
-    listener.info os.servers.inspect
+    listener.info 'booting and instance on which to run devstack.'
+
+    creds = nw.boot :name => 'jenkins-devstack', :flavor => 'standard.xsmall', :image => /Ubuntu Precise/, :key_name => 'jenkins-devstack'
+
+    listener.info 'VM booted.  installing devstack.'
+
+    nw.run_command creds, install_devstack_cmd do |output|
+      listener.info output
+    end
+
+    response = Net::HTTP.get URI.parse("http://#{creds[:ip]}:80")
+    raise "horizon dashboard does not appear to be running on #{creds[:ip]}" unless response =~ /Log In/
+
+    listener.info 'devstack is running.'
   end
 
 end
