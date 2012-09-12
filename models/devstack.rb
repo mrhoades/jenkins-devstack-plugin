@@ -1,7 +1,7 @@
 require 'novawhiz'
 require 'net/http'
 require 'uri'
-require 'buffered_io_patch'
+require_relative 'buffered_io_patch'
 
 class Devstack < Jenkins::Tasks::Builder
 
@@ -36,7 +36,7 @@ class Devstack < Jenkins::Tasks::Builder
       :auth_url => os_auth_url,
       :service_type => "compute")
 
-    listener.info 'booting and instance on which to run devstack.'
+    listener.info 'booting an instance on which to run devstack.'
 
     creds = nw.boot :name => 'jenkins-devstack', :flavor => 'standard.xsmall', :image => /Ubuntu Precise/, :key_name => 'jenkins-devstack'
 

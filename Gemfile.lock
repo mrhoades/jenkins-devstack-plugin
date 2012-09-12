@@ -1,11 +1,25 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    blockenspiel (0.4.5)
+    hashie (1.2.0)
     jenkins-plugin-runtime (0.2.2)
       json
       slop (~> 3.0.2)
     json (1.7.5-java)
-    novawhiz (0.0.0)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.2.2)
+    net-ssh-simple (1.5.4)
+      blockenspiel (~> 0.4.3)
+      hashie (>= 1.1.0)
+      net-scp (~> 1.0.4)
+      net-ssh (~> 2.2.1)
+    novawhiz (0.0.2)
+      net-ssh-simple
+      openstack
+    openstack (1.0.4)
+      json
     slop (3.0.4)
 
 PLATFORMS
@@ -13,4 +27,4 @@ PLATFORMS
 
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
-  novawhiz
+  novawhiz (>= 0.0.2)
