@@ -15,6 +15,9 @@ class Devstack < Jenkins::Tasks::Builder
 
   def install_devstack_cmd
     <<-eos
+      sudo echo "ClientAliveInterval 600" >> sudo /etc/ssh/sshd_config &&
+      sudo echo "ClientAliveCountMax 5"   >> sudo /etc/ssh/sshd_config &&
+      sudo service ssh restart &&
       sudo apt-get install --yes git &&
       git clone git://github.com/openstack-dev/devstack.git &&
       cd devstack &&
