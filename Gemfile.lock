@@ -6,6 +6,7 @@ GEM
     jenkins-plugin-runtime (0.2.2)
       json
       slop (~> 3.0.2)
+    json (1.7.5)
     json (1.7.5-java)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -15,7 +16,7 @@ GEM
       hashie (>= 1.1.0)
       net-scp (~> 1.0.4)
       net-ssh (~> 2.2.1)
-    novawhiz (0.0.2)
+    novawhiz (0.0.3)
       net-ssh-simple
       openstack
     openstack (1.0.4)
@@ -27,4 +28,4 @@ PLATFORMS
 
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
-  novawhiz (>= 0.0.2)
+  novawhiz (>= 0.0.3)
