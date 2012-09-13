@@ -2,7 +2,7 @@ Jenkins::Plugin::Specification.new do |plugin|
 
   plugin.name = 'devstack'
   plugin.display_name = 'DevStack Plugin'
-  plugin.version = '0.0.1'
+  plugin.version = '0.0.3'
   plugin.description = 'Deploys Devstack Onto OpenStack'
 
   # You should create a wiki-page for your plugin when you publish it, see
