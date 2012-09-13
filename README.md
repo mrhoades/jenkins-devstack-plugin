@@ -12,4 +12,4 @@ A jenkins plugin which provisions an openstack instance, and installs devstack o
 * `jpi build`
 
 # Gotchas:
-* must be run with ruby 1.9: `export JRUBY_OPTS=--1.9`` or `echo "compat.version=1.9" >> ~/.jrubyrc`
+* must be run with ruby 1.9: `export JRUBY_OPTS=--1.9` or `echo "compat.version=1.9" >> ~/.jrubyrc`
