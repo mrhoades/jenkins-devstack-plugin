@@ -41,7 +41,7 @@ class Devstack < Jenkins::Tasks::Builder
 
     listener.info 'booting an instance on which to run devstack.'
 
-    creds = nw.boot :name => 'jenkins-devstack', :flavor => 'standard.xsmall', :image => /Ubuntu Precise/, :key_name => 'jenkins-devstack'
+    creds = nw.boot :name => 'jenkins-devstack', :flavor => 'standard.medium', :image => /Ubuntu Precise/, :key_name => 'jenkins-devstack'
 
     listener.info 'VM booted.  installing devstack.'
 
