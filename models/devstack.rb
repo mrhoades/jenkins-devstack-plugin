@@ -41,7 +41,7 @@ class Devstack < Jenkins::Tasks::Builder
 
     name = 'jenkins-devstack'
 
-    listener.info 'cleaninug up existing devstack installation.'
+    listener.info 'cleaning up existing devstack installation, if one exists.'
     nw.delete_keypair_if_exists(name)
     nw.delete_if_exists(name)
     sleep(10)
