@@ -39,9 +39,17 @@ class Devstack < Jenkins::Tasks::Builder
       :auth_url => os_auth_url,
       :service_type => "compute")
 
+    name = 'jenkins-devstack'
+
+    listener.info 'cleaninug up existing devstack installation.'
+    nw.delete_keypair_if_exists(name)
+    nw.delete_if_exists(name)
+    sleep(10)
+
+
     listener.info 'booting an instance on which to run devstack.'
 
-    creds = nw.boot :name => 'jenkins-devstack', :flavor => 'standard.medium', :image => /Ubuntu Precise/, :key_name => 'jenkins-devstack'
+    creds = nw.boot :name => name, :flavor => 'standard.medium', :image => /Ubuntu Precise/, :key_name => name
 
     listener.info 'VM booted.  installing devstack.'
 
