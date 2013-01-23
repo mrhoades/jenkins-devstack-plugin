@@ -4,29 +4,80 @@
 %>
     <table style="margin-left: 30px;">
       <%
-         f.entry :title => 'OS_USERNAME',
+         f.entry :title => 'Username',
                  :field => 'os_username',
-                 :description => 'openstack username' do
+                 :description => 'HP Cloud account username' do
            f.textbox :clazz => 'required', :default => '${OS_USERNAME}'
          end
-         f.entry :title => 'OS_PASSWORD',
+         f.entry :title => 'Password',
                  :field => 'os_password',
-                 :description => 'openstack password' do
-           f.textbox :clazz => 'required', :default => '${OS_PASSWORD}'
+                 :description => 'HP Cloud account password' do
+           f.password :clazz => 'required', :default => '${OS_PASSWORD}'
          end
-         f.entry :title => 'OS_TENANT_NAME',
+         f.entry :title => 'Tenant Name',
                  :field => 'os_tenant_name',
-                 :description => 'openstack tenant name' do
+                 :description => 'HP Cloud tenant name' do
            f.textbox :clazz => 'required', :default => '${OS_TENANT_NAME}'
          end
-         f.entry :title => 'OS_AUTH_URL',
+         f.entry :title => 'Auth URL',
                  :field => 'os_auth_url',
-                 :description => 'openstack auth url' do
+                 :description => 'HP Cloud auth url' do
            f.textbox :clazz => 'required', :default => '${OS_AUTH_URL}'
          end
+         f.entry :title => 'Region Name',
+                 :field => 'os_region_name',
+                 :description => 'Zone where vm will be created (az-1.region-a.geo-1,az-2.region-a.geo-1,az-3.region-a.geo-1)' do
+           f.textbox :clazz => 'required', :default => '${OS_REGION_NAME}'
+         end
+         f.entry :title => 'VM Name',
+                 :field => 'vm_name',
+                 :description => 'Name that will appear in nova for VM' do
+           f.textbox :clazz => 'required', :default => 'my-test-server'
+         end
+         f.entry :title => 'VM Re-use',
+                 :field => 'vm_reuse_existing',
+                 :description => 'If cloud VM my-test-server exists already, it will be reused. (Note it must have been created with this plugin for this to work.)' do
+           f.checkbox :clazz => 'required', :default => 'false'
+         end
+         f.entry :title => 'Image Name',
+                 :field => 'vm_image_name',
+                 :description => 'Operating system image that will be deployed. Partial strings allowed. First image matched is used.' do
+           f.textbox :clazz => 'required', :default => 'Ubuntu Precise 12.04 LTS Server 64-bit'
+         end
+         f.entry :title => 'Flavor Name',
+                 :field => 'vm_flavor_name',
+                 :description => 'Flavor or size of vm (standard.xsmall, standard.medium, etc)' do
+           f.textbox :clazz => 'required', :default => 'standard.xsmall'
+         end
+         f.entry :title => 'Security Group',
+                 :field => 'vm_security_groups',
+                 :description => 'Openstack security group (my custom group)' do
+           f.textbox :clazz => 'required', :default => 'default'
+         end
+         f.entry :title => 'Shell Commands',
+                 :field => 'vm_shell_commands',
+                 :description => 'Commands or scripts that will be run on the vm. Split commands with && ' do
+           f.textarea :clazz => 'required', :default => 'whoami && last && uname -a && sleep 10'
+         end
+         f.entry :title => 'Check URL',
+                 :field => 'res_val_url',
+                 :description => 'URL to check. The server-ip will be set automatically. Leave empty to skip.' do
+           f.textbox :clazz => 'required', :default => 'http://<server-ip>'
+         end
+         f.entry :title => 'Port',
+                 :field => 'res_val_port',
+                 :description => 'Http port for service.' do
+           f.textbox :clazz => 'required', :default => '80'
+         end
+         f.entry :title => 'Validation Text',
+                 :field => 'res_val_text',
+                 :description => 'Text at URL to verify happy web page. Look for home page text.' do
+           f.textarea :clazz => 'required', :default => 'It works'
+         end
+    %>
 
-
-      %></table>
+    </table>
 <%
    end
+
 %>

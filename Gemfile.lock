@@ -1,35 +1,46 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    arrayfields (4.7.4)
     blockenspiel (0.4.5)
     bouncy-castle-java (1.5.0146.1)
+    chronic (0.9.0)
+    fattr (2.2.1)
     hashie (1.2.0)
-    jenkins-plugin-runtime (0.2.2)
+    jenkins-plugin-runtime (0.2.3)
       json
       slop (~> 3.0.2)
-    jruby-openssl (0.7.7)
+    jruby-openssl (0.8.2)
       bouncy-castle-java (>= 1.5.0146.1)
-    json (1.7.5)
-    json (1.7.5-java)
+    json (1.7.6)
+    json (1.7.6-java)
+    main (5.1.1)
+      arrayfields (>= 4.7.4)
+      chronic (>= 0.6.2)
+      fattr (>= 2.2.0)
+      map (>= 5.1.0)
+    map (6.2.0)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
-    net-ssh (2.2.2)
-    net-ssh-simple (1.5.4)
+    net-ssh (2.6.3)
+    net-ssh-simple (1.5.9)
       blockenspiel (~> 0.4.3)
       hashie (>= 1.1.0)
       net-scp (~> 1.0.4)
-      net-ssh (~> 2.2.1)
-    novawhiz (0.0.5)
+      net-ssh (~> 2.6.2)
+    novafizz (0.0.8)
+      main
       net-ssh-simple
       openstack
-    openstack (1.0.6)
+    openstack (1.0.7)
       json
     slop (3.0.4)
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
   jruby-openssl
-  novawhiz (>= 0.0.5)
+  novafizz (>= 0.0.8)
