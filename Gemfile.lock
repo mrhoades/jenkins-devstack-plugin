@@ -43,4 +43,4 @@ PLATFORMS
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
   jruby-openssl
-  novafizz (>= 0.0.9)
+  novafizz (>= 0.0.10)
