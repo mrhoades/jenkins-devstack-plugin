@@ -19,5 +19,6 @@ Jenkins::Plugin::Specification.new do |plugin|
   # This is a required dependency for every ruby plugin.
   plugin.depends_on 'ruby-runtime', '0.10'
   plugin.depends_on 'token-macro', '1.5.1'
+  plugin.depends_on 'nova-fizz', '0.0.9'
 
 end

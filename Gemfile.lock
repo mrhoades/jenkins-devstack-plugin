@@ -28,7 +28,7 @@ GEM
       hashie (>= 1.1.0)
       net-scp (~> 1.0.4)
       net-ssh (~> 2.6.2)
-    novafizz (0.0.8)
+    novafizz (0.0.9)
       main
       net-ssh-simple
       openstack
@@ -43,4 +43,4 @@ PLATFORMS
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
   jruby-openssl
-  novafizz (>= 0.0.8)
+  novafizz (>= 0.0.9)
