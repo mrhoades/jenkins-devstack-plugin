@@ -12,7 +12,6 @@ GEM
       slop (~> 3.0.2)
     jruby-openssl (0.8.2)
       bouncy-castle-java (>= 1.5.0146.1)
-    json (1.7.6)
     json (1.7.6-java)
     main (5.1.1)
       arrayfields (>= 4.7.4)
@@ -28,7 +27,7 @@ GEM
       hashie (>= 1.1.0)
       net-scp (~> 1.0.4)
       net-ssh (~> 2.6.2)
-    novafizz (0.0.9)
+    novafizz (0.0.10)
       main
       net-ssh-simple
       openstack
@@ -38,7 +37,6 @@ GEM
 
 PLATFORMS
   java
-  ruby
 
 DEPENDENCIES
   jenkins-plugin-runtime (~> 0.2.0)
