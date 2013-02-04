@@ -1,11 +1,16 @@
 require 'novawhiz'
-require 'net/http'
-require 'uri'
 require_relative 'buffered_io_patch'
 
 
 # TODO: write a script that boots a vm, install jenkins, then installs this plugin
 
+# TODO: bugbug - fix all the printed URLs to the webby to inclue the port... these links are clickable in jenkins output, make them work.
+
+# TODO: use novawhiz to autofill select boxes with valid cloud options
+
+# TODO: script builder, add action, check result, retry, soft or hard fail, similiar to multiphase job... only not a fucking multiphase job.
+# TODO: dropdown that will load pre-canned scripts... to do shit. deploy this, fart that, verify this, load into text area so user can customize and save.
+# TODO: test button and connect to verify creds worky
 
 # TODO: USE CASES: i want to spin up a brand new vm (destroy existing) and then run some chit on it, capturing the output
 # TODO: USE CASES: i want to reuse an existing vm and run scripts, capturing the output
@@ -84,7 +89,7 @@ class Devstack < Jenkins::Tasks::Builder
 
       creds = {:ip => nw.server_by_name(vm_name).accessipv4,
                :user => 'ubuntu',
-               :key => nw.get_key(vm_name)}
+               :key => nw.get_key(vm_name,File.expand_path("~/.ssh/hpcloud-keys/" + os_region_name))}
 
     else
 
@@ -109,7 +114,7 @@ class Devstack < Jenkins::Tasks::Builder
       #end
     end
 
-    listener.info "SSH to #{creds[:ip]} Commands on node:"
+    listener.info "SSH to #{creds[:ip]} and run commands on node:"
     listener.info vm_shell_commands
     nw.run_command(creds, exec_cmd_on_vm(vm_shell_commands)) do |output|
       listener.info output
@@ -117,7 +122,10 @@ class Devstack < Jenkins::Tasks::Builder
 
     if res_val_url != ''
 
+      sleep(20) # sleep for now, until polling and retry lives
+
       addy = res_val_url.sub( "<server-ip>",creds[:ip])
+      fulladdy = addy + ":" + res_val_port
 
       listener.info "Check for text #{res_val_text} at URL #{addy}"# Full
 
@@ -127,10 +135,13 @@ class Devstack < Jenkins::Tasks::Builder
 
       response = http.request(Net::HTTP::Get.new(uri.request_uri))
 
+      #todo: bugbug - check should use regex and poll for an ammount of time if match is not found
+      # currently jenkins shows startup page to user, which doesn't have whatch looking for
+      # write a "waitfortext()" fuktion.
 
 
-      raise "Cannot find text '#{res_val_text}' at #{addy}: " + response.body unless response.body =~ /#{res_val_text}/
-      listener.info "Found text '#{res_val_text}' at #{addy}"
+      raise "Cannot find text '#{res_val_text}' at #{fulladdy}: " + response.body unless response.body =~ /#{res_val_text}/
+      listener.info "Found text '#{res_val_text}' at #{fulladdy}"
     end
 
   end #perform
