@@ -1,54 +1,6 @@
 require 'novawhiz'
 require_relative 'buffered_io_patch'
 
-
-# TODO: write a script that boots a vm, install jenkins, then installs this plugin
-
-# TODO: bugbug - fix all the printed URLs to the webby to inclue the port... these links are clickable in jenkins output, make them work.
-
-# TODO: use novawhiz to autofill select boxes with valid cloud options
-
-# TODO: script builder, add action, check result, retry, soft or hard fail, similiar to multiphase job... only not a fucking multiphase job.
-# TODO: dropdown that will load pre-canned scripts... to do shit. deploy this, fart that, verify this, load into text area so user can customize and save.
-# TODO: test button and connect to verify creds worky
-
-# TODO: USE CASES: i want to spin up a brand new vm (destroy existing) and then run some chit on it, capturing the output
-# TODO: USE CASES: i want to reuse an existing vm and run scripts, capturing the output
-# TODO: USE CASES: provide multiple ways to validate the results of vm boot and subsequent script execution
-# TODO: USE CASES: i want flexibility with the sizing, flavors, and os's that are booted
-# TODO: USE CASES: i want to use floating ips, so other environments and systems be setup to depend on a DNS name or static IP
-
-
-# TODO: how do i set and get the floating ip through ruby openstack? hpfog maybe?
-
-# TODO: code in handling for hp cloud bug where keypairs can't be deleted when they contain two "."
-
-# TODO: try using java script to hide inputs when using various modes
-# TODO: try using java script for client side form validation (when filling out plugin params)
-
-# TODO: provide validation through a url check
-# TODO: provide validation via regex that requires something to be found
-# TODO: provide validation via regex that requires something NOT to appear
-# TODO: provide validation via script execution that must return some defined result
-
-# TODO: allow setting multiple security groups
-# TODO: allow user to provide a floating ip for the instance, automagically set it (so DNS can used effectively)
-# TODO: how to allow IP passthrough or port forwarding to devstack vm? so user can hit VMs running on devstack instance from outside
-
-# TODO: LOWPRI - allow user to provide an existing key to use
-
-# TODO: should i write a regex to peek at script to make sure it has && between steps, and can actually be run?
-
-# TODO: DONE - move devstack install script to a job input parameter (textarea - execution script). making plugin generic and reusable.
-# TODO: DONE - provide a selector to user that allows them to configure a verification script
-# TODO: DONE - tweak step info and logging to be generic
-# TODO: SKIP install tempest template on devstack node (devstack already does all the magix)
-# TODO: DONE - do I weave tempest execution into this plugin or create another plugin?
-# TODO: DONE - add custom FIXED_RANGE option to localrc, so devstack setup doesn't barf when it conflicts with hp cloud rage
-# TODO: DONE - run tempest tests
-# TODO: DONE - replace hardcoded parameters for vm creation with plugin input attrs
-
-
 class Devstack < Jenkins::Tasks::Builder
 
   display_name 'Boot HP Cloud VM'
@@ -89,7 +41,7 @@ class Devstack < Jenkins::Tasks::Builder
 
       creds = {:ip => nw.server_by_name(vm_name).accessipv4,
                :user => 'ubuntu',
-               :key => nw.get_key(vm_name,File.expand_path("~/.ssh/hpcloud-keys/" + os_region_name))}
+               :key => nw.get_key(vm_name, File.expand_path("~/.ssh/hpcloud-keys/" + os_region_name))}
 
     else
 
@@ -138,7 +90,6 @@ class Devstack < Jenkins::Tasks::Builder
       #todo: bugbug - check should use regex and poll for an ammount of time if match is not found
       # currently jenkins shows startup page to user, which doesn't have whatch looking for
       # write a "waitfortext()" fuktion.
-
 
       raise "Cannot find text '#{res_val_text}' at #{fulladdy}: " + response.body unless response.body =~ /#{res_val_text}/
       listener.info "Found text '#{res_val_text}' at #{fulladdy}"

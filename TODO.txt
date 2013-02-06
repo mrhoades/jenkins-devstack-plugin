@@ -1,0 +1,44 @@
+
+# TODO: USE CASES: i want to spin up a brand new vm (destroy existing) and then run some chit on it, capturing the output
+# TODO: USE CASES: i want to reuse an existing vm and run scripts, capturing the output
+# TODO: USE CASES: provide multiple ways to validate the results of vm boot and subsequent script execution (check url, parse output, etc)
+# TODO: USE CASES: i want flexibility with the sizing, flavors, and os's that are booted
+# TODO: USE CASES: i want to use floating ips, so other environments and systems can be setup to depend on a DNS name or static IP
+
+# TODO: bugbug - passwords should be encrypted, currently they are only masked. test out the password inject feature, make sure it worky.
+# TODO: bugbug - fix all the printed URLs to the webby to inclue the port... these links are clickable in jenkins output, make them work.
+# TODO: bugbug - check url should use regex and poll for an amount of time if match is not found immediately
+
+# TODO: how do i set and get the floating ip through ruby openstack? hpfog maybe?
+# TODO: write a script that boots a vm, install jenkins, then installs this plugin (CI CD your shit with the latest jenkins build)
+
+# TODO: use novawhiz to autofill select boxes with valid cloud options
+# TODO: script builder, add action, check result, retry, soft or hard fail, similiar to multiphase job... encapsulated here though.
+# TODO: dropdown that will load pre-canned scripts... to do chit. deploy this, fart that, verify this, load into text area so user can customize and save.
+# TODO: test button and connect to verify creds worky (so user doesn't have to run a job and debug a failure)
+
+# TODO: try using java script to hide inputs when using various modes
+# TODO: try using java script for client side form validation (when filling out plugin params)
+
+# TODO: provide validation through a url check
+# TODO: provide validation via regex that requires something to be found
+# TODO: provide validation via regex that requires something NOT to appear
+# TODO: provide validation via script execution that must return some defined result
+
+# TODO: allow setting multiple security groups (currently only one is supported)
+# TODO: allow user to provide a floating ip for the instance, automagically set it (so DNS can used effectively)
+# TODO: how to allow IP passthrough or port forwarding to devstack vm? so user can hit VMs running on devstack instance from outside
+
+# TODO: LOWPRI - allow user to provide an existing key to use
+
+# TODO: write a regex to peek at script to make sure it has && between steps, and can actually be run, or tear them all off and add them on as needed
+
+# TODO: DONE - code in handling for hp cloud bug where keypairs can't be deleted when they contain two "."
+# TODO: DONE - move devstack install script to a job input parameter (textarea - execution script). making plugin generic and reusable.
+# TODO: DONE - provide a selector to user that allows them to configure a verification script
+# TODO: DONE - tweak step info and logging to be generic
+# TODO: SKIP install tempest template on devstack node (devstack already does all the magix)
+# TODO: DONE - do I weave tempest execution into this plugin or create another plugin?
+# TODO: DONE - add custom FIXED_RANGE option to localrc, so devstack setup doesn't barf when it conflicts with hp cloud rage
+# TODO: DONE - run tempest tests
+# TODO: DONE - replace hardcoded parameters for vm creation with plugin input attrs
