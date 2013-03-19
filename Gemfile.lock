@@ -2,13 +2,13 @@ GEM
   remote: http://rubygems.org/
   specs:
     blockenspiel (0.4.5)
-    bouncy-castle-java (1.5.0146.1)
+    bouncy-castle-java (1.5.0147)
     hashie (1.2.0)
     jenkins-plugin-runtime (0.2.2)
       json
       slop (~> 3.0.2)
-    jruby-openssl (0.7.7)
-      bouncy-castle-java (>= 1.5.0146.1)
+    jruby-openssl (0.8.6)
+      bouncy-castle-java (>= 1.5.0147)
     json (1.7.5)
     json (1.7.5-java)
     net-scp (1.0.4)
@@ -32,5 +32,5 @@ PLATFORMS
 
 DEPENDENCIES
   jenkins-plugin-runtime (= 0.2.2)
-  jruby-openssl (>= 0.7.7)
+  jruby-openssl (>= 0.8.6)
   novafizz (>= 0.0.10)
