@@ -61,6 +61,22 @@ class Devstack < Jenkins::Tasks::Builder
       listener.info 'VM booted with IP Address: ' + creds[:ip]
       listener.info creds[:key]
 
+
+      # bugbugbug - race condition exists between boot of node which reports status "active"
+      #             and when the node is actually active and ssh'able. hack to retry ssh.
+      for i in 1..19
+          begin
+              nw.run_command(creds, exec_cmd_on_vm('whoami')) do |output|
+                listener.info output
+              end
+              break
+          rescue
+              listener.info "wait ten seconds and retry ssh connect..."       
+              sleep(10)      
+              next
+          end
+      end
+
       #if vm_floating_ip != ''
       #  nw.assign_floating_ip(vm_name,vm_floating_ip)
       #end
